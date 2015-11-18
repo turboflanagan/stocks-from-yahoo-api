@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="stocksApp">
+<head>
+	<title></title>
+	
+	<link rel= "stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel= "stylesheet" type="text/css" href="css/styles.css">
+	
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-route.min.js"></script>
+	<script src="js/controller.js"></script>
+
+</head>
+<body ng-controller="stocksController">
+
+	<div id="wrapper" class="container">
+		<!-- Load all stocks in the left hand rail that match the user search -->
+		<div class="row">
+			<div id="left-all-stocks" class="col-sm-4">
+				<form ng-submit="getStocks()">
+					<div id="get-stock-text">What stocks would you like to search for? Separate with a comma (i.e. goog, msft, yhoo):</div>
+					<div id="get-stock-input">
+						<input type="text" ng-model="userStocks">
+					</div>
+				</form>
+				<div id="{{stock.Symbol}}" ng-click="loadStock(stock)" ng-repeat='stock in listOfStocks2'>
+					<div class="company-name">{{stock.Name}}</div>
+					<div class="stock-change {{getChangeClass(stock.Change)}}">{{stock.Change}}</div>
+					<div class="stock-symbol">{{stock.symbol}}</div>
+				</div>
+			</div>
+
+
+		<!-- Show the middle column with the stock detail inside -->
+			<div id="right-single-stock" class="col-md-4">
+				<div id="stock-filter">
+					Filter: <input type="text" ng-model="stockFilter">
+					<!-- Have Angular create one div for each property in this stock -->
+					<div id="" ng-repeat="detail in dataList | filter:stockFilter">
+						<div class="stock-properties">
+							<div class="detail-prop">{{detail.prop}}</div>
+							<div class="prop-value">{{detail.value}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
